@@ -4,10 +4,9 @@
 	<string name="input">In</string>
 	<string name="output">Out</string>
 	<string name="no_device">Please connect a RobotControl board.</string>
-	<string name="servo1Label">Servo<sub>1</sub></string>
-	<string name="ledLabel">LED<sub>1</sub></string>
-	<string name="relay1Label">Relay<sub>1</sub></string>
-	<string name="relay2Label">Relay<sub>2</sub></string>
+	<string name="panServoLabel">pan_Servo</string>
+	<string name="tiltServoLabel">tilt_Servo</string>
+	<string name="ledLabel">Serial_activity_LED</string>
 	<string name="off">Off</string>
 	<string name="on">On</string>
 </resources>

@@ -20,16 +20,12 @@ public class OutputController extends AccessoryController {
 	}
 
 	protected void onAccesssoryAttached() {
-		setupServoController(1, R.id.servo1);
-		setupServoController(2, R.id.servo2);
-		setupServoController(3, R.id.servo3);
+		setupServoController(1, R.id.pan_Servo);
+		setupServoController(2, R.id.tilt_Servo);
 
 		setupLedController(1, R.id.leds1);
 		setupLedController(2, R.id.leds2);
 		setupLedController(3, R.id.leds3);
-
-		setupRelayController(1, R.id.relay1);
-		setupRelayController(2, R.id.relay2);
 	}
 
 	private void setupServoController(int servoIndex, int viewId) {
