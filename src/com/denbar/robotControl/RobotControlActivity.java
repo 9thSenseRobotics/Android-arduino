@@ -56,9 +56,6 @@ public class RobotControlActivity extends Activity implements Runnable {
 	FileOutputStream mOutputStream;
 
 	private static final int MESSAGE_SWITCH = 1;
-	private static final int MESSAGE_TEMPERATURE = 2;
-	private static final int MESSAGE_LIGHT = 3;
-	private static final int MESSAGE_JOY = 4;
 
 	public static final byte LED_SERVO_COMMAND = 2;
 	public static final byte RELAY_COMMAND = 3;
@@ -81,47 +78,7 @@ public class RobotControlActivity extends Activity implements Runnable {
 		}
 	}
 
-	protected class TemperatureMsg {
-		private int temperature;
 
-		public TemperatureMsg(int temperature) {
-			this.temperature = temperature;
-		}
-
-		public int getTemperature() {
-			return temperature;
-		}
-	}
-
-	protected class LightMsg {
-		private int light;
-
-		public LightMsg(int light) {
-			this.light = light;
-		}
-
-		public int getLight() {
-			return light;
-		}
-	}
-
-	protected class JoyMsg {
-		private int x;
-		private int y;
-
-		public JoyMsg(int x, int y) {
-			this.x = x;
-			this.y = y;
-		}
-
-		public int getX() {
-			return x;
-		}
-
-		public int getY() {
-			return y;
-		}
-	}
 
 	private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
 		@Override
@@ -288,35 +245,7 @@ public class RobotControlActivity extends Activity implements Runnable {
 					i += 3;
 					break;
 
-				case 0x4:
-					if (len >= 3) {
-						Message m = Message.obtain(mHandler,
-								MESSAGE_TEMPERATURE);
-						m.obj = new TemperatureMsg(composeInt(buffer[i + 1],
-								buffer[i + 2]));
-						mHandler.sendMessage(m);
-					}
-					i += 3;
-					break;
 
-				case 0x5:
-					if (len >= 3) {
-						Message m = Message.obtain(mHandler, MESSAGE_LIGHT);
-						m.obj = new LightMsg(composeInt(buffer[i + 1],
-								buffer[i + 2]));
-						mHandler.sendMessage(m);
-					}
-					i += 3;
-					break;
-
-				case 0x6:
-					if (len >= 3) {
-						Message m = Message.obtain(mHandler, MESSAGE_JOY);
-						m.obj = new JoyMsg(buffer[i + 1], buffer[i + 2]);
-						mHandler.sendMessage(m);
-					}
-					i += 3;
-					break;
 
 				default:
 					Log.d(TAG, "unknown msg: " + buffer[i]);
@@ -335,21 +264,6 @@ public class RobotControlActivity extends Activity implements Runnable {
 			case MESSAGE_SWITCH:
 				SwitchMsg o = (SwitchMsg) msg.obj;
 				handleSwitchMessage(o);
-				break;
-
-			case MESSAGE_TEMPERATURE:
-				TemperatureMsg t = (TemperatureMsg) msg.obj;
-				handleTemperatureMessage(t);
-				break;
-
-			case MESSAGE_LIGHT:
-				LightMsg l = (LightMsg) msg.obj;
-				handleLightMessage(l);
-				break;
-
-			case MESSAGE_JOY:
-				JoyMsg j = (JoyMsg) msg.obj;
-				handleJoyMessage(j);
 				break;
 
 			}
@@ -371,15 +285,6 @@ public class RobotControlActivity extends Activity implements Runnable {
 				Log.e(TAG, "write failed", e);
 			}
 		}
-	}
-
-	protected void handleJoyMessage(JoyMsg j) {
-	}
-
-	protected void handleLightMessage(LightMsg l) {
-	}
-
-	protected void handleTemperatureMessage(TemperatureMsg t) {
 	}
 
 	protected void handleSwitchMessage(SwitchMsg o) {

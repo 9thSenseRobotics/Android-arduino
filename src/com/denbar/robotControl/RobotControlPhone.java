@@ -18,12 +18,6 @@ public class RobotControlPhone extends BaseActivity implements OnClickListener {
 	Drawable mNormalTabImage;
 	OutputController mOutputController;
 
-	@Override
-	protected void hideControls() {
-		super.hideControls();
-		mOutputController = null;
-	}
-
 	public void onCreate(Bundle savedInstanceState) {
 		mFocusedTabImage = getResources().getDrawable(
 				R.drawable.tab_focused_holo_dark);

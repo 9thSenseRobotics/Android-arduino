@@ -6,8 +6,6 @@ import android.view.MenuItem;
 
 public class BaseActivity extends RobotControlActivity {
 
-	private InputController mInputController;
-
 	public BaseActivity() {
 		super();
 	}
@@ -50,44 +48,11 @@ public class BaseActivity extends RobotControlActivity {
 
 	protected void hideControls() {
 		setContentView(R.layout.no_device);
-		mInputController = null;
 	}
 
 	protected void showControls() {
 		setContentView(R.layout.main);
 
-		mInputController = new InputController(this);
-		mInputController.accessoryAttached();
 	}
-
-	protected void handleJoyMessage(JoyMsg j) {
-		if (mInputController != null) {
-			mInputController.joystickMoved(j.getX(), j.getY());
-		}
-	}
-
-	protected void handleLightMessage(LightMsg l) {
-		if (mInputController != null) {
-			mInputController.setLightValue(l.getLight());
-		}
-	}
-
-	protected void handleTemperatureMessage(TemperatureMsg t) {
-		if (mInputController != null) {
-			mInputController.setTemperature(t.getTemperature());
-		}
-	}
-
-	protected void handleSwitchMessage(SwitchMsg o) {
-		if (mInputController != null) {
-			byte sw = o.getSw();
-			if (sw >= 0 && sw < 4) {
-				mInputController.switchStateChanged(sw, o.getState() != 0);
-			} else if (sw == 4) {
-				mInputController
-						.joystickButtonSwitchStateChanged(o.getState() != 0);
-			}
-		}
-	}
-
 }
+

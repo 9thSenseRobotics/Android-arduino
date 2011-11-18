@@ -1,14 +1,11 @@
 package com.denbar.robotControl;
 
 import android.view.ViewGroup;
-
 import com.denbar.robotControl.AccessoryController;
 import com.denbar.robotControl.ColorLEDController;
 import com.denbar.robotControl.RobotControlActivity;
 import com.denbar.robotControl.R;
-import com.denbar.robotControl.RelayController;
 import com.denbar.robotControl.ServoController;
-import android.view.ViewGroup;
 
 public class OutputController extends AccessoryController {
 
@@ -38,11 +35,4 @@ public class OutputController extends AccessoryController {
 				getResources(), mVertical);
 		ledC.attachToView((ViewGroup) findViewById(viewId));
 	}
-
-	private void setupRelayController(int index, int viewId) {
-		RelayController r = new RelayController(mHostActivity, index,
-				getResources());
-		r.attachToView((ViewGroup) findViewById(viewId));
-	}
-
 }
