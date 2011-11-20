@@ -66,33 +66,21 @@ containing a value of this type.
         public static final int Button3=0x7f080004;
         public static final int Button4=0x7f080005;
         public static final int ButtonContainer=0x7f080000;
-        public static final int ButtonContainer_ref=0x7f080007;
-        public static final int InOutTabContainer=0x7f08000b;
-        public static final int LightContainer=0x7f08001a;
-        public static final int TempContainer=0x7f080016;
-        public static final int TempLightContainer=0x7f080015;
-        public static final int TempLightContainer_ref=0x7f080006;
-        public static final int hiddenPercentValue=0x7f080019;
-        public static final int imageView1=0x7f080011;
-        public static final int inputContainer=0x7f08000e;
-        public static final int inputLabel=0x7f08000c;
-        public static final int leds1=0x7f080008;
-        public static final int leds2=0x7f080009;
-        public static final int leds3=0x7f08000a;
-        public static final int lightPercentLabel=0x7f08001b;
-        public static final int lightPercentSuffix=0x7f08001d;
+        public static final int ButtonContainer_ref=0x7f080006;
+        public static final int InOutTabContainer=0x7f08000a;
+        public static final int imageView1=0x7f080010;
+        public static final int inputContainer=0x7f08000d;
+        public static final int inputLabel=0x7f08000b;
+        public static final int leds1=0x7f080007;
+        public static final int leds2=0x7f080008;
+        public static final int leds3=0x7f080009;
         public static final int lightPercentValue=0x7f080001;
-        public static final int lightPercentValueContainer=0x7f08001c;
-        public static final int lightRawValue=0x7f08001f;
-        public static final int lightRawValueContainer=0x7f08001e;
-        public static final int outputContainer=0x7f08000f;
-        public static final int outputLabel=0x7f08000d;
-        public static final int pan_Servo=0x7f080013;
-        public static final int servo_tablet=0x7f080012;
-        public static final int tempLabel=0x7f080017;
-        public static final int tempValue=0x7f080018;
-        public static final int textView1=0x7f080010;
-        public static final int tilt_Servo=0x7f080014;
+        public static final int outputContainer=0x7f08000e;
+        public static final int outputLabel=0x7f08000c;
+        public static final int pan_Servo=0x7f080012;
+        public static final int servo_tablet=0x7f080011;
+        public static final int textView1=0x7f08000f;
+        public static final int tilt_Servo=0x7f080013;
     }
     public static final class layout {
         public static final int buttoncontainer=0x7f030000;
@@ -106,9 +94,8 @@ containing a value of this type.
         public static final int outputcontainer=0x7f030008;
         public static final int servo=0x7f030009;
         public static final int servo_tablet=0x7f03000a;
-        public static final int templightcontainer=0x7f03000b;
-        public static final int vertical_color_sliders=0x7f03000c;
-        public static final int vertical_led_slider=0x7f03000d;
+        public static final int vertical_color_sliders=0x7f03000b;
+        public static final int vertical_led_slider=0x7f03000c;
     }
     public static final class string {
         public static final int app_name=0x7f060000;

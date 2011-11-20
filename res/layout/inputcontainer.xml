@@ -2,9 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent" android:layout_height="match_parent"
 	android:orientation="vertical" android:weightSum="2">
-	<include layout="@layout/templightcontainer" android:id="@+id/TempLightContainer_ref"
-		android:layout_width="match_parent" android:layout_height="wrap_content"
-		android:layout_weight="1" />
 	<include layout="@layout/buttoncontainer" android:id="@+id/ButtonContainer_ref"
 		android:layout_width="match_parent" android:layout_height="wrap_content"
 		android:layout_weight="1" />
