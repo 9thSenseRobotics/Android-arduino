@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 public class C2DMMessageReceiver extends BroadcastReceiver {
 	@Override
@@ -23,6 +24,7 @@ public class C2DMMessageReceiver extends BroadcastReceiver {
 
 		}
 	}
+
 /*
 	public void createNotification(Context context, String payload) {
 		NotificationManager notificationManager = (NotificationManager) context
@@ -42,5 +44,5 @@ public class C2DMMessageReceiver extends BroadcastReceiver {
 	}
 
 	*/
-	
+
 }
