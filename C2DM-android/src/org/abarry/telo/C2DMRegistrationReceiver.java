@@ -3,11 +3,13 @@ package org.abarry.telo;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -98,18 +100,12 @@ public class C2DMRegistrationReceiver extends BroadcastReceiver {
 			String phoneName = prefs.getString("phoneName", "default name");
 			
 			// send the ID to the server
-			boolean success = sendRegistrationIdToServer(deviceId, phoneName, registrationId);
+			sendRegistrationIdToServer(deviceId, phoneName, registrationId);
 			
-			// check to see if things worked, if not, schedule a retry
-			//if (success == true)
-			//{
-		
-			// Also save it in the preference to be able to show it later
-			// (and write down that we succeeded)
+			
 			saveRegistrationId(context, registrationId);
 			
 			
-			//}
 			
 			
 		/*	
@@ -192,46 +188,39 @@ public class C2DMRegistrationReceiver extends BroadcastReceiver {
 	 * @param phoneName name of the phone to display to the user on the website
 	 * @return returns true on success (server said OK)  If this is true, there is a very high probability that everything is working well
 	 */
-	public boolean sendRegistrationIdToServer(String deviceId, String phoneName,
+	public void sendRegistrationIdToServer(String deviceId, String phoneName,
 			String registrationId) {
-		boolean flag = false;
 		Log.d("C2DM", "Sending registration ID to my application server");
-		HttpClient client = new DefaultHttpClient();
-		HttpPost post = new HttpPost(TELOBOT_REGISTER_URL);
+		final HttpClient client = new DefaultHttpClient();
+		final HttpPost post = new HttpPost(TELOBOT_REGISTER_URL);
+			
+		// set up the POST data
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+		// Get the deviceID
+		nameValuePairs.add(new BasicNameValuePair("deviceid", deviceId));
+		nameValuePairs.add(new BasicNameValuePair("phonename", phoneName));
+		nameValuePairs.add(new BasicNameValuePair("registrationid",
+				registrationId));
+
+		// encode the POST data
 		try {
-			
-			// set up the POST data
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-			// Get the deviceID
-			nameValuePairs.add(new BasicNameValuePair("deviceid", deviceId));
-			nameValuePairs.add(new BasicNameValuePair("phonename", phoneName));
-			nameValuePairs.add(new BasicNameValuePair("registrationid",
-					registrationId));
-
-			// encode the POST data
 			post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			
-			// execute the HTML POST call to hit the server
-			HttpResponse response = client.execute(post);
-			
-			// read the response
-			BufferedReader rd = new BufferedReader(new InputStreamReader(
-					response.getEntity().getContent()));
-
-			String line = "";
-			while ((line = rd.readLine()) != null) {
-				// check for OK from the server
-				if (line == "OK")
-				{
-					flag = true;
-				}
-				Log.e("HttpResponse", line);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
+		} catch (UnsupportedEncodingException e1) {
+			//e1.printStackTrace();
 		}
 		
-		return flag;
+		// execute the HTML POST call to hit the server
+		new Thread(new Runnable() {
+		    public void run() {
+		    	try {
+					HttpResponse response = client.execute(post);
+				} catch (ClientProtocolException e) {
+					//e.printStackTrace();
+				} catch (IOException e) {
+					//e.printStackTrace();
+				}
+		    }
+		  }).start();
+
 	}
 }

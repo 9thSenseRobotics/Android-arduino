@@ -23,8 +23,22 @@ public class C2DMMessageReceiver extends BroadcastReceiver {
 			// TODO Send this to my application server to get the real data
 			// Lets make something visible to show that we received the message
 			createNotification(context, payload);
+			
+			
+			doUsb(context, payload);
 
 		}
+	}
+	
+	private void doUsb(Context context, String payload)
+	{
+		Log.d("C2DM", "in doUsb");
+		
+		// fire an intent
+		Intent i = new Intent(context, UsbFromC2DMService.class);
+		i.putExtra("payload", payload);
+		context.startService(i);
+		
 	}
 
 	public void createNotification(Context context, String payload) {
